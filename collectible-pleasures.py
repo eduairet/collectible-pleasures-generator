@@ -10,12 +10,12 @@ lineSpace = h / 50  # space between lines
 
 def main(nft):
     """Runs all the functionality."""
-    for i in range(1):
+    for i in range(4):
         newPage(w, h), frameDuration(1 / 12)
         with savedState():
             fill(0), rect(0, 0, w, h)
         createNft(nft)
-    saveImage(os.path.join(outdir, f'{nft.lower().replace(" ", "0")}.gif'))
+    saveImage(os.path.join(outdir, f'{nft.replace(" ", "0")}.gif'))
     newDrawing()
 
 
@@ -268,4 +268,6 @@ if __name__ == "__main__":
     for i in alphabet:
         for j in alphabet:
             for k in alphabet:
-                main(f"{i}{j}{k}")
+                cnft = f"{i}{j}{k}".lower().replace(" ", "0")
+                if f'{cnft}.gif' in os.listdir(outdir): continue
+                else: main(cnft)
