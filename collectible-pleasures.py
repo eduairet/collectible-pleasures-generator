@@ -15,7 +15,7 @@ def main(nft):
         with savedState():
             fill(0), rect(0, 0, w, h)
         createNft(nft)
-    saveImage(os.path.join(outdir, f'{nft.replace(" ", "0")}.gif'))
+    saveImage(os.path.join(outdir, gifName(nft)))
     newDrawing()
 
 
@@ -262,12 +262,16 @@ letters = {
     " ": [[(h * 0.9) / lineSpace, 1, 0]],
 }
 
+def gifName(string): return f'{string.lower().replace(" ", "0")}.gif'
+
 
 if __name__ == "__main__":
     alphabet = "".join(letters.keys())
     for i in alphabet:
         for j in alphabet:
             for k in alphabet:
-                cnft = f"{i}{j}{k}".lower().replace(" ", "0")
-                if f'{cnft}.gif' in os.listdir(outdir): continue
-                else: main(cnft)
+                cnft = f"{i}{j}{k}"
+                print(cnft)
+                if gifName(cnft) in os.listdir(outdir):
+                    continue
+                main(cnft)
